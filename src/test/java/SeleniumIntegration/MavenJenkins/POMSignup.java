@@ -26,12 +26,14 @@ import static org.monte.media.VideoFormatKeys.*;
 
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+//import com.saucelabs.common.SauceOnDemandSessionIdProvider;
 
 //Non-TestNG Project
 
-public class POMSignup {
+public class POMSignup implements SauceOnDemandSessionIdProvider{
 	
 	private static ScreenRecorder screenRecorder;
+	private static String sessionId;
 	//private static WebDriver driver = null;
 	public static void main(String[] args) throws IOException, AWTException {
 		System.out.println("Jenkins with saucelabs");
@@ -90,7 +92,7 @@ public class POMSignup {
         WebDriver driver = new RemoteWebDriver(
                 new URL("http://amit1881:c33b1e5d-0656-41e9-87f0-5c16dc26e576@ondemand.saucelabs.com:80/wd/hub"),
                 caps);
-		
+	      sessionId = (((RemoteWebDriver) driver).getSessionId()).toString();
 	      driver = new FirefoxDriver();
 	      
 	      // Start Capturing the Video
