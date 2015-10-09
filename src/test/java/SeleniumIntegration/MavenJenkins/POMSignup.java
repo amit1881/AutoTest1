@@ -93,6 +93,7 @@ public class POMSignup {
                 new URL("http://amit1881:c33b1e5d-0656-41e9-87f0-5c16dc26e576@ondemand.saucelabs.com:80/wd/hub"),
                 caps);
 	      sessionId = (((RemoteWebDriver) driver).getSessionId()).toString();
+	      String message = String.format("SauceOnDemandSessionID=%1$s", this.sessionId);
 	      System.out.println("Session Id="+ sessionId);
 	      driver = new FirefoxDriver();
 	      
