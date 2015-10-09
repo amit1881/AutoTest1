@@ -95,6 +95,7 @@ public class POMSignup {
 	      sessionId = (((RemoteWebDriver) driver).getSessionId()).toString();
 	      String message = String.format("SauceOnDemandSessionID=%1$s", this.sessionId);
 	      System.out.println("Session Id="+ sessionId);
+	      System.out.println(message);
 	      driver = new FirefoxDriver();
 	      
 	      // Start Capturing the Video
