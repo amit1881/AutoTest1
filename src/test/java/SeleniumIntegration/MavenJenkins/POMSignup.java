@@ -30,7 +30,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 //Non-TestNG Project
 
-public class POMSignup implements SauceOnDemandSessionIdProvider{
+public class POMSignup {
 	
 	private static ScreenRecorder screenRecorder;
 	private static String sessionId;
@@ -93,6 +93,7 @@ public class POMSignup implements SauceOnDemandSessionIdProvider{
                 new URL("http://amit1881:c33b1e5d-0656-41e9-87f0-5c16dc26e576@ondemand.saucelabs.com:80/wd/hub"),
                 caps);
 	      sessionId = (((RemoteWebDriver) driver).getSessionId()).toString();
+	      System.out.println("Session Id="+ sessionId);
 	      driver = new FirefoxDriver();
 	      
 	      // Start Capturing the Video
