@@ -1,9 +1,9 @@
 package SeleniumIntegration.MavenJenkins;
 
 import java.awt.*;
+import java.net.URL;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
@@ -14,8 +14,6 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.monte.media.math.Rational;
@@ -26,17 +24,19 @@ import org.monte.screenrecorder.ScreenRecorder;
 import static org.monte.media.AudioFormatKeys.*;
 import static org.monte.media.VideoFormatKeys.*;
 
-
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 //Non-TestNG Project
 
 public class POMSignup {
 	
 	private static ScreenRecorder screenRecorder;
-	private static WebDriver driver = null;
+	//private static WebDriver driver = null;
 	public static void main(String[] args) throws IOException, AWTException {
+		System.out.println("Jenkins with saucelabs");
 		
-		File file = new File("D:\\screenshots");  
+		File file = new File("/var/www/html/TestVideos");  
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int width = screenSize.width;
         int height = screenSize.height;
@@ -80,15 +80,17 @@ public class POMSignup {
 	               new Format(MediaTypeKey, MediaType.VIDEO, EncodingKey, "black",
 	                    FrameRateKey, Rational.valueOf(30)),
 	               null, file, "MyVideo");
-		 DesiredCapabilities caps = DesiredCapabilities.firefox();
-	        caps.setCapability("platform", "Linux");
-	        caps.setCapability("version", "41");
-	        caps.setCapability("name", "Web Driver demo Test");
-	        caps.setCapability("tags", "Tag1");
-	        caps.setCapability("build", "v1.0");
-	        WebDriver driver = new RemoteWebDriver(
-	                new URL("http://amit1881:c33b1e5d-0656-41e9-87f0-5c16dc26e576@ondemand.saucelabs.com:80/wd/hub"),
-	                caps);
+	               
+	                       DesiredCapabilities caps = DesiredCapabilities.firefox();
+        caps.setCapability("platform", "Linux");
+        caps.setCapability("version", "41");
+        caps.setCapability("name", "Web Driver demo Test");
+        caps.setCapability("tags", "Tag1");
+        caps.setCapability("build", "v1.0");
+        WebDriver driver = new RemoteWebDriver(
+                new URL("http://amit1881:c33b1e5d-0656-41e9-87f0-5c16dc26e576@ondemand.saucelabs.com:80/wd/hub"),
+                caps);
+		
 	      driver = new FirefoxDriver();
 	      
 	      // Start Capturing the Video
@@ -122,7 +124,7 @@ public class POMSignup {
 	      
 	      //Save screenshot
 	      File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-	      FileUtils.copyFile(screenshot, new File("D:\\screenshots\\screenshots1.jpg"));
+	      FileUtils.copyFile(screenshot, new File("/var/www/html/TestVideos/screenshots1.jpg"));
 	      
 	      //Save video
 	      //File sr=(File) OutputType.FILE;
